@@ -1,0 +1,14 @@
+name: backend
+dependencies:
+  - python==3.8
+  - pip
+  - psycopg2
+  -
+    pip:
+      - django
+      - djangorestframework==3.12.2
+      - djangorestframework_simplejwt
+      - drf-yasg==1.20.0
+      - markdown==3.3.3
+      - gunicorn
+      - flake8

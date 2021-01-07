@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  backend:
+    image: registry.gitlab.propulsion-home.ch/michal-wyszowski-repository/week-7/day-2/motion-docker2:latest
+    restart: always
+    env_file:
+      - ./envs/dev.env
+    command: 'sh /scripts/dev.sh'
+    ports:
+      - "8000:8000"
+
+    # these volumes pass the data from your computer to the docker container
+    volumes:
+      - ./backend:/backend
+      - static-files:/static-files
+      - media-files:/media-files
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - ./envs/dev.env
+    ports:
+      - "5432:5432"
+
+
+# these volumes create a directory in your computer so no matter what, they will not be deleted
+volumes:
+  media-files:
+  static-files:
+  postgres:
