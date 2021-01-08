@@ -28,16 +28,17 @@ COPY ./backend /backend
 
 RUN mkdir -p /frontend
 RUN mkdir -p /frontend_tmp
-COPY ./frontend /frontend_tmp
-WORKDIR frontend_tmp
-RUN npm i
-RUN npm run build
-
-#COPY ./frontend/package.json /frontend
-#COPY ./frontend/package-lock.json /frontend
-#RUN npm install
-#COPY ./frontend /frontend
+#COPY ./frontend /frontend_tmp
+#WORKDIR frontend_tmp
+#RUN npm i
 #RUN npm run build
+
+WORKDIR frontend_tmp
+
+COPY ./frontend/package.json /frontend_tmp
+RUN npm i
+COPY ./frontend /frontend_tmp
+RUN npm run build
 
 WORKDIR /backend
 

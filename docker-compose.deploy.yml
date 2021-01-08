@@ -23,10 +23,10 @@ services:
     command: 'sh /scripts/run.sh'
     # these volumes pass the data from your computer to the docker container
     volumes:
+      - frontend:/frontend/build
       - static-files:/static-files
       - media-files:/media-files
-      - frontend:/frontend/build
-      - ./backend:/backend
+
     depends_on:
       - postgres
 
