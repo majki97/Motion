@@ -26,6 +26,7 @@ services:
       - frontend:/frontend/build
       - static-files:/static-files
       - media-files:/media-files
+
     depends_on:
       - postgres
 
