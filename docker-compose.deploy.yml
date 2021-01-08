@@ -16,7 +16,7 @@ services:
 
 
   backend:
-    image: registry.gitlab.propulsion-home.ch/michal-wyszowski-repository/week-7/day-2/motion-docker2:master
+    image: registry.gitlab.propulsion-home.ch/michal-wyszowski-repository/week-7/motion-docker:master
     restart: always
     env_file:
       - ./envs/prod.env
@@ -44,3 +44,4 @@ volumes:
   static-files:
   postgres:
   frontend:
+  #new line
