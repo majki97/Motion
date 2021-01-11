@@ -16,7 +16,7 @@ services:
 
 
   backend:
-    image: backend:latest
+    image: registry.gitlab.propulsion-home.ch/motion-backend-awesome-group/motion-docker:master
     restart: always
     env_file:
       - ./envs/prod.env

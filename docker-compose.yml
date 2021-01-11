@@ -2,7 +2,7 @@ version: '3'
 
 services:
   backend:
-    image: backend:latest
+    image: registry.gitlab.propulsion-home.ch/motion-backend-awesome-group/motion-docker:latest
     restart: always
     env_file:
       - ./envs/dev.env
