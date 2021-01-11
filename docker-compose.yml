@@ -2,7 +2,7 @@ version: '3'
 
 services:
   backend:
-    image: registry.gitlab.propulsion-home.ch/michal-wyszowski-repository/week-7/motion-docker:latest
+    image: backend:latest
     restart: always
     env_file:
       - ./envs/dev.env
