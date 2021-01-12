@@ -2,7 +2,7 @@ from django.db.models import Q
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, DestroyAPIView, ListAPIView
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
-
+from apps.users.permissions import IsUser, IsUserOrReadOnly
 from apps.users.models import User
 from apps.users.serializer import UserSerializer
 
@@ -16,6 +16,7 @@ class UsersListView(ListAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsUser]
 
     # def get_serializer_class(self):
     #     if self.request.method == 'GET':
