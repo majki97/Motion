@@ -28,6 +28,7 @@ class GetSingleUser(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_url_kwarg = "user_id"
+    permission_classes = [IsUser]
 
 
 # Follow user
@@ -35,6 +36,7 @@ class FollowUser(UpdateAPIView):
     serializer_class = UserSerializer
     queryset = UserSerializer
     lookup_url_kwarg = 'user_id'
+    permission_classes = [IsUser]
 
     def patch(self, request, *args, **kwargs):
         follow_user_id = self.kwargs.get("user_id")
@@ -49,6 +51,7 @@ class UnfollowUser(DestroyAPIView):
     queryset = UserSerializer
     serializer_class = UserSerializer
     lookup_url_kwarg = "user_id"
+    permission_classes = [IsUser]
 
     def delete(self, request, *args, **kwargs):
         user_id = self.kwargs.get("user_id")
@@ -60,6 +63,7 @@ class UnfollowUser(DestroyAPIView):
 # List of the followers
 class FollowersList(ListAPIView):
     serializer_class = UserSerializer
+    permission_classes = [IsUser]
 
     def get_queryset(self):
         all_followers = self.request.user.followees.all()
@@ -69,6 +73,7 @@ class FollowersList(ListAPIView):
 # List of people user is following
 class UserIsFollowing(ListAPIView):
     serializer_class = UserSerializer
+    permission_classes = [IsUser]
 
     def get_queryset(self):
         following = self.request.user.followers.all()
@@ -81,6 +86,7 @@ class UserIsFollowing(ListAPIView):
 class UserSearch(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsUser]
 
     def get(self, request, *args, **kwargs):
         #queryset = self.get_queryset()
