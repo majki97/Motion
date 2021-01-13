@@ -1,4 +1,6 @@
+from project.settings import EMAIL_HOST_USER
 from django.db.models import Q
+from django.core.mail import send_mail
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, DestroyAPIView, ListAPIView, \
     RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
@@ -43,7 +45,13 @@ class FollowUser(UpdateAPIView):
         follow_user = User.objects.get(id=follow_user_id)
         if follow_user not in self.request.user.followers.all():
             follow_user.followees.add(self.request.user)
+        subject = 'You have a follower'
+        message = 'You have a new follower'
+        recipient = follow_user.email
+        send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
+
         return Response(f"{self.request.user.username} follows {follow_user.username}")
+
 
 
 # Unfollow user
