@@ -41,6 +41,8 @@ urlpatterns = [
     path('backend/api/social/posts/', include('apps.post.urls')),
     path('backend/api/social/friends/', include('apps.friend_request.urls')),
     path('backend/api/social/comments/', include('apps.friend_request.urls')),
+    path('backend/api/auth/registration/', include('apps.subscribe.urls')),
+
 
     path('backend/api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('backend/api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
@@ -48,3 +50,5 @@ urlpatterns = [
     path('backend/api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 
 ]
+
+#Anything goes
