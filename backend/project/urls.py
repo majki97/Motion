@@ -40,7 +40,7 @@ urlpatterns = [
     path('backend/api/social/users/', include('apps.users.urls')),
     path('backend/api/social/posts/', include('apps.post.urls')),
     path('backend/api/social/friends/', include('apps.friend_request.urls')),
-    path('backend/api/social/comments/', include('apps.friend_request.urls')),
+    path('backend/api/social/comments/', include('apps.comments.urls')),
     path('backend/api/auth/registration/', include('apps.subscribe.urls')),
 
 

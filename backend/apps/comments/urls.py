@@ -1,8 +1,7 @@
 from django.urls import path
 
-from apps.comments.views import CommentsListView, CreateCommentView
+from apps.comments.views import CreateGetCommentView
 
 urlpatterns = [
-    path('<int:pk>/', CommentsListView.as_view(), name="comments_list"),
-    path('<int:pk>/', CreateCommentView.as_view() name="add_comment_to_post"),
+    path('<int:post_id>/', CreateGetCommentView.as_view(), name="comments_list"),
 ]
