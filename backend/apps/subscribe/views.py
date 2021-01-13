@@ -41,7 +41,7 @@ import random
 
 
 class SubscribeListView(CreateAPIView):
-    serializer_class = SubscribeSerializer
+    #serializer_class = SubscribeSerializer
     permission_classes = []
 
 
@@ -56,12 +56,23 @@ class SubscribeListView(CreateAPIView):
         message = 'Here is your validation code ' + validation_code
         recipient = email_address
         send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
-        return Response(status=status.HTTP_200_OK)
+
+        try:
+            new_user = User(email=email_address, username=email_address, is_active=False)
+            new_user.save()
+            registration_profile = RegistrationProfile(user=new_user, code=validation_code)
+            registration_profile.save()
+            return Response(status=status.HTTP_200_OK)
+        except IntegrityError:
+            return Response(data="This email is already taken.", status=400)
+
 
 
 class RegistrationValidation(GenericAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = []
+
 
     def post(self, request, *args, **kwargs):
         email = self.request.data["email"]
