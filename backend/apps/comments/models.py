@@ -1,7 +1,7 @@
 from django.db import models
 from apps.post import Post
 
-
+# Create your models here.
 
 class Comment(models.Model):
     text = models.CharField(max_length=300)
