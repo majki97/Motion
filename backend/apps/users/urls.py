@@ -9,8 +9,8 @@ urlpatterns = [
     path('unfollow/<int:user_id>/', UnfollowUser.as_view(), name="unfollow_user"),
     path('followers/', FollowersList.as_view(), name="followers"),
     path('following/', UserIsFollowing.as_view(), name="following"),
-    path('<str:ref>/', UserSearch.as_view(), name='search_user'),
-    path('me/', MeView.as_view(), name="user_profile")
+    path('me/', MeView.as_view(), name="user_profile"),
+    path('search/<str:ref>/', UserSearch.as_view(), name='search_user'),
 ]
 
 
