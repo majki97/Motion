@@ -1,10 +1,10 @@
 from django.db.models import Q
-from rest_framework.generics import UpdateAPIView, RetrieveAPIView, DestroyAPIView, ListAPIView
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import UpdateAPIView, RetrieveAPIView, DestroyAPIView, ListAPIView, \
+    RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from apps.users.permissions import IsUser, IsUserOrReadOnly
 from apps.users.models import User
-from apps.users.serializer import UserSerializer
+from apps.users.serializer import UserSerializer, MeSerializer
 
 
 # Get All Users
@@ -89,11 +89,19 @@ class UserSearch(ListAPIView):
     permission_classes = [IsUser]
 
     def get(self, request, *args, **kwargs):
-        #queryset = self.get_queryset()
-        #current_user_posts = Post.objects.filter(user=current_user, created=datetime.today())
+        # queryset = self.get_queryset()
+        # current_user_posts = Post.objects.filter(user=current_user, created=datetime.today())
         first_name = kwargs.get('ref')
-        #last_name = kwargs.get('ref')
+        # last_name = kwargs.get('ref')
         queryset = self.get_queryset().filter(first_name__icontains=first_name)
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
+
+class MeView(RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = MeSerializer
+    # permission_classes = [IsUser]
+
+    def get_object(self):
+        return self.request.user
