@@ -41,7 +41,7 @@ import random
 
 
 class SubscribeListView(CreateAPIView):
-    #serializer_class = SubscribeSerializer
+    serializer_class = SubscribeSerializer
     permission_classes = []
 
 
