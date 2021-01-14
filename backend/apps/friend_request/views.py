@@ -20,7 +20,7 @@ class SendFriendRequest(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = FriendSerializer
     lookup_url_kwarg = 'user_id'
-    permission_classes = [IsUser]
+    #permission_classes = [IsUser]
 
     def post(self, request, *args, **kwargs):
         user = request.user
