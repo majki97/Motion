@@ -1,6 +1,6 @@
-from abc import ABC
 from rest_framework import serializers
 
 
-class SubscribeSerializer(serializers.Serializer, ABC):
+class SubscribeSerializer(serializers.Serializer):
+    # class Meta:
     email = serializers.EmailField()

@@ -4,9 +4,10 @@ from apps.comments.serializers import CommentSerializer
 from apps.comments.models import Comment
 
 
-# create and get comments for a specific post
-
 class CreateGetCommentView(ListCreateAPIView):
+    """
+    Create comment on a post and list all comments on specific post
+    """
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
     lookup_field = 'post_id'

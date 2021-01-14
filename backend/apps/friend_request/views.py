@@ -10,15 +10,19 @@ from apps.users.permissions import IsUser
 User = get_user_model()
 
 
-# get all friends
 class GetAllFriends(ListCreateAPIView):
+    """
+    List of all friends
+    """
     queryset = FriendRequest.objects.all()
     serializer_class = FriendSerializer
     permission_classes = [IsUser]
 
 
-# send friend request
 class SendFriendRequest(ListCreateAPIView):
+    """
+    Send friend request with email confirmation
+    """
     queryset = User.objects.all()
     serializer_class = FriendSerializer
     lookup_url_kwarg = 'user_id'
@@ -35,8 +39,10 @@ class SendFriendRequest(ListCreateAPIView):
         return Response(self.get_serializer(friend_request).data)
 
 
-# approve or delete friend request
 class ApproveOrNotFriendRequest(RetrieveUpdateDestroyAPIView):
+    """
+    Approve or delete friend request
+    """
     queryset = FriendRequest.objects.all()
     serializer_class = FriendSerializer
     lookup_url_kwarg = 'friend_request_id'
