@@ -33,8 +33,6 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),  # Permissions for docs access
 )
 
-
-
 urlpatterns = [
     path('backend/admin/', admin.site.urls),
     path('backend/api/social/users/', include('apps.users.urls')),
@@ -43,12 +41,9 @@ urlpatterns = [
     path('backend/api/social/comments/', include('apps.comments.urls')),
     path('backend/api/auth/registration/', include('apps.subscribe.urls')),
 
-
     path('backend/api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('backend/api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('backend/api/token/verify/', jwt_views.TokenVerifyView.as_view(), name='token_verify'),
     path('backend/api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 
 ]
-
-#Anything goes

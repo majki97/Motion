@@ -1,6 +1,7 @@
 from django.urls import path
 
-from apps.post.views import PostListView, RetrieveUpdateDestroyPostView, TogglePost, LikedPost, FollowedPostList, UserListPostOrder
+from apps.post.views import PostListView, RetrieveUpdateDestroyPostView, TogglePost, LikedPost, FollowedPostList, \
+                            UserListPostOrder
 
 urlpatterns = [
     path('', PostListView.as_view(), name="users_list"),
