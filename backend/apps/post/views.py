@@ -2,7 +2,6 @@ from rest_framework.response import Response
 from apps.post.permissions import IsUser, IsUserOrReadOnly
 from apps.post.models import Post
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView, ListAPIView
-
 from apps.post.serializers import PostSerializer
 
 

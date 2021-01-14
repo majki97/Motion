@@ -1,12 +1,6 @@
-from django.contrib.auth import get_user_model
+from abc import ABC
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
 
 
-
-class SubscribeSerializer(serializers.Serializer):
-    # class Meta:
-    #    model = User
-    #    fields = ['id', 'username', 'email']
+class SubscribeSerializer(serializers.Serializer, ABC):
     email = serializers.EmailField()
-

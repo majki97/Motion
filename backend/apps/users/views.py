@@ -1,10 +1,9 @@
 from project.settings import EMAIL_HOST_USER
-from django.db.models import Q
 from django.core.mail import send_mail
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, DestroyAPIView, ListAPIView, \
     RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
-from apps.users.permissions import IsUser, IsUserOrReadOnly
+from apps.users.permissions import IsUser
 from apps.users.models import User
 from apps.users.serializer import UserSerializer, MeSerializer
 
@@ -19,10 +18,6 @@ class UsersListView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsUser]
-
-    # def get_serializer_class(self):
-    #     if self.request.method == 'GET':
-    #         return UserSerializer
 
 
 # Get single user
@@ -49,9 +44,7 @@ class FollowUser(UpdateAPIView):
         message = 'You have a new follower'
         recipient = follow_user.email
         send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
-
         return Response(f"{self.request.user.username} follows {follow_user.username}")
-
 
 
 # Unfollow user
@@ -88,8 +81,7 @@ class UserIsFollowing(ListAPIView):
         return following
 
 
-# Get specific user by providing parameters, need to be checked as it's working partially in postman but can't see it
-# in swager
+# Get specific user by providing parameters
 
 class UserSearch(ListAPIView):
     queryset = User.objects.all()
@@ -97,10 +89,7 @@ class UserSearch(ListAPIView):
     permission_classes = [IsUser]
 
     def get(self, request, *args, **kwargs):
-        # queryset = self.get_queryset()
-        # current_user_posts = Post.objects.filter(user=current_user, created=datetime.today())
         first_name = kwargs.get('ref')
-        # last_name = kwargs.get('ref')
         queryset = self.get_queryset().filter(first_name__icontains=first_name)
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
@@ -109,7 +98,6 @@ class UserSearch(ListAPIView):
 class MeView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = MeSerializer
-    # permission_classes = [IsUser]
 
     def get_object(self):
         return self.request.user

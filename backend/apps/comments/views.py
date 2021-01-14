@@ -1,10 +1,10 @@
 from rest_framework.generics import ListCreateAPIView
-from apps.users.permissions import IsUser, IsUserOrReadOnly
+from apps.users.permissions import IsUser
 from apps.comments.serializers import CommentSerializer
 from apps.comments.models import Comment
 
 
-#create and get comments for a specific post
+# create and get comments for a specific post
 
 class CreateGetCommentView(ListCreateAPIView):
     serializer_class = CommentSerializer
@@ -14,4 +14,3 @@ class CreateGetCommentView(ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user, post_id=self.kwargs['post_id'])
-
