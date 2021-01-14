@@ -49,6 +49,7 @@ export const SignInFormStyled = styled.form`
         margin-top: 140px;
         background-image: linear-gradient(115deg, #922ecf 0%, #426be7);
         color: white;
+        outline: none;
     }
 `;
 
