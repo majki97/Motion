@@ -12,5 +12,3 @@ urlpatterns = [
     path('me/', MeView.as_view(), name="user_profile"),
     path('search/<str:ref>/', UserSearch.as_view(), name='search_user'),
 ]
-
-

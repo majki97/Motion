@@ -5,4 +5,3 @@ urlpatterns = [
     path('', SubscribeListView.as_view(), name='subscribe'),
     path('validation/', RegistrationValidation.as_view(), name='validation')
 ]
-
