@@ -29,7 +29,7 @@ class SendFriendRequest(ListCreateAPIView):
         friend_request.save()
         subject = 'Friend request'
         message = 'You have a new friend request!'
-        recipient = friend_request.email
+        recipient = receiver.email
         send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
         return Response(self.get_serializer(friend_request).data)
 
