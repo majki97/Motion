@@ -1,3 +1,5 @@
+from django.core.mail import send_mail
+from project.settings import EMAIL_HOST_USER
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
@@ -25,6 +27,10 @@ class SendFriendRequest(ListCreateAPIView):
         receiver = self.get_object()
         friend_request = FriendRequest(sender=user, receiver=receiver)
         friend_request.save()
+        subject = 'Friend request'
+        message = 'You have a new friend request!'
+        recipient = friend_request.email
+        send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
         return Response(self.get_serializer(friend_request).data)
 
 

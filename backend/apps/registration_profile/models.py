@@ -12,6 +12,7 @@ def code_generator(length=5):
 
 class RegistrationProfile(models.Model):
      code = models.CharField(default=code_generator, max_length=5)
+     code_used = models.BooleanField(default=False)
      user = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='registration_profile')
 
 
