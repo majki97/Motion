@@ -6,12 +6,18 @@ from apps.post.serializers import PostSerializer
 
 
 class PostListView(ListCreateAPIView):
+    """
+    Post a post and get all posts
+    """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsUserOrReadOnly]
 
 
 class RetrieveUpdateDestroyPostView(RetrieveUpdateDestroyAPIView):
+    """
+    Get, Update and Delete specific post
+    """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsUser]
