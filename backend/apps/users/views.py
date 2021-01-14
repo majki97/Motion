@@ -8,8 +8,6 @@ from apps.users.models import User
 from apps.users.serializer import UserSerializer, MeSerializer
 
 
-# Get All Users
-
 class UsersListView(ListAPIView):
     """
         This text is the description for this API.
@@ -20,16 +18,20 @@ class UsersListView(ListAPIView):
     permission_classes = [IsUser]
 
 
-# Get single user
 class GetSingleUser(RetrieveAPIView):
+    """
+    Get specific user
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_url_kwarg = "user_id"
     permission_classes = [IsUser]
 
 
-# Follow user
 class FollowUser(UpdateAPIView):
+    """
+    Follow user and send follow email
+    """
     serializer_class = UserSerializer
     queryset = UserSerializer
     lookup_url_kwarg = 'user_id'
@@ -47,8 +49,10 @@ class FollowUser(UpdateAPIView):
         return Response(f"{self.request.user.username} follows {follow_user.username}")
 
 
-# Unfollow user
 class UnfollowUser(DestroyAPIView):
+    """
+    Unfollow use
+    """
     queryset = UserSerializer
     serializer_class = UserSerializer
     lookup_url_kwarg = "user_id"
@@ -61,8 +65,10 @@ class UnfollowUser(DestroyAPIView):
         return Response("You have been unfollowed")
 
 
-# List of the followers
 class FollowersList(ListAPIView):
+    """
+    List of followers
+    """
     serializer_class = UserSerializer
     permission_classes = [IsUser]
 
@@ -71,8 +77,10 @@ class FollowersList(ListAPIView):
         return all_followers
 
 
-# List of people user is following
 class UserIsFollowing(ListAPIView):
+    """
+    List of people user is following
+    """
     serializer_class = UserSerializer
     permission_classes = [IsUser]
 
@@ -81,9 +89,10 @@ class UserIsFollowing(ListAPIView):
         return following
 
 
-# Get specific user by providing parameters
-
 class UserSearch(ListAPIView):
+    """
+    Get specific user by providing his name
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsUser]
@@ -96,6 +105,9 @@ class UserSearch(ListAPIView):
 
 
 class MeView(RetrieveUpdateDestroyAPIView):
+    """
+    Logged in user profile view and update
+    """
     queryset = User.objects.all()
     serializer_class = MeSerializer
 

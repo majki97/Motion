@@ -13,6 +13,9 @@ import random
 
 
 class SubscribeListView(CreateAPIView):
+    """
+    Profile registration by sending validation code
+    """
     serializer_class = SubscribeSerializer
     permission_classes = []
 
@@ -38,6 +41,9 @@ class SubscribeListView(CreateAPIView):
 
 
 class RegistrationValidation(GenericAPIView):
+    """
+    Validation of user, adding user data
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = []
