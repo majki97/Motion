@@ -1,15 +1,12 @@
 from project.settings import EMAIL_HOST_USER
-from django.db.models import Q
 from django.core.mail import send_mail
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, DestroyAPIView, ListAPIView, \
     RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
-from apps.users.permissions import IsUser, IsUserOrReadOnly
+from apps.users.permissions import IsUser
 from apps.users.models import User
 from apps.users.serializer import UserSerializer, MeSerializer
 
-
-# Get All Users
 
 class UsersListView(ListAPIView):
     """
@@ -20,21 +17,21 @@ class UsersListView(ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsUser]
 
-    # def get_serializer_class(self):
-    #     if self.request.method == 'GET':
-    #         return UserSerializer
 
-
-# Get single user
 class GetSingleUser(RetrieveAPIView):
+    """
+    Get specific user
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_url_kwarg = "user_id"
     permission_classes = [IsUser]
 
 
-# Follow user
 class FollowUser(UpdateAPIView):
+    """
+    Follow user and send follow email
+    """
     serializer_class = UserSerializer
     queryset = UserSerializer
     lookup_url_kwarg = 'user_id'
@@ -49,13 +46,13 @@ class FollowUser(UpdateAPIView):
         message = 'You have a new follower'
         recipient = follow_user.email
         send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
-
         return Response(f"{self.request.user.username} follows {follow_user.username}")
 
 
-
-# Unfollow user
 class UnfollowUser(DestroyAPIView):
+    """
+    Unfollow use
+    """
     queryset = UserSerializer
     serializer_class = UserSerializer
     lookup_url_kwarg = "user_id"
@@ -68,8 +65,10 @@ class UnfollowUser(DestroyAPIView):
         return Response("You have been unfollowed")
 
 
-# List of the followers
 class FollowersList(ListAPIView):
+    """
+    List of followers
+    """
     serializer_class = UserSerializer
     permission_classes = [IsUser]
 
@@ -78,8 +77,10 @@ class FollowersList(ListAPIView):
         return all_followers
 
 
-# List of people user is following
 class UserIsFollowing(ListAPIView):
+    """
+    List of people user is following
+    """
     serializer_class = UserSerializer
     permission_classes = [IsUser]
 
@@ -88,28 +89,27 @@ class UserIsFollowing(ListAPIView):
         return following
 
 
-# Get specific user by providing parameters, need to be checked as it's working partially in postman but can't see it
-# in swager
-
 class UserSearch(ListAPIView):
+    """
+    Get specific user by providing his name
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsUser]
 
     def get(self, request, *args, **kwargs):
-        # queryset = self.get_queryset()
-        # current_user_posts = Post.objects.filter(user=current_user, created=datetime.today())
         first_name = kwargs.get('ref')
-        # last_name = kwargs.get('ref')
         queryset = self.get_queryset().filter(first_name__icontains=first_name)
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
 
 class MeView(RetrieveUpdateDestroyAPIView):
+    """
+    Logged in user profile view and update
+    """
     queryset = User.objects.all()
     serializer_class = MeSerializer
-    # permission_classes = [IsUser]
 
     def get_object(self):
         return self.request.user

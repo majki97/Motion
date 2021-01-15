@@ -2,24 +2,31 @@ from rest_framework.response import Response
 from apps.post.permissions import IsUser, IsUserOrReadOnly
 from apps.post.models import Post
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView, ListAPIView
-
 from apps.post.serializers import PostSerializer
 
 
 class PostListView(ListCreateAPIView):
+    """
+    Post a post and get all posts
+    """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsUserOrReadOnly]
 
 
 class RetrieveUpdateDestroyPostView(RetrieveUpdateDestroyAPIView):
+    """
+    Get, Update and Delete specific post
+    """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsUser]
 
 
-# Like unlike post
 class TogglePost(GenericAPIView):
+    """
+    Like/Unlike post
+    """
     queryset = Post
     serializer_class = PostSerializer
     lookup_url_kwarg = 'post_id'
@@ -36,8 +43,10 @@ class TogglePost(GenericAPIView):
         return Response(self.get_serializer(post).data)
 
 
-# List of post user likes
 class LikedPost(ListAPIView):
+    """
+    List of posts liked by user
+    """
     serializer_class = PostSerializer
     permission_classes = [IsUser]
 
@@ -47,8 +56,10 @@ class LikedPost(ListAPIView):
         return posts
 
 
-# List of post from user that current user is following
 class FollowedPostList(ListAPIView):
+    """
+    List of post from user that current user is following
+    """
     serializer_class = PostSerializer
     permission_classes = [IsUserOrReadOnly]
 
@@ -58,8 +69,10 @@ class FollowedPostList(ListAPIView):
         return posts
 
 
-# List of post of selected user in chronological order
 class UserListPostOrder(ListAPIView):
+    """
+    List of post of selected user in chronological order
+    """
     serializer_class = PostSerializer
     lookup_url_kwarg = 'user_id'
     permission_classes = [IsUserOrReadOnly]

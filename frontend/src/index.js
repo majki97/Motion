@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from './styles';
 import { authAction } from './store/actions/auth';
 import { SignUpRoute } from './routes/SignUpRoute';
+import { CongratsRoute } from './routes/CongratsRoute';
 
 const token = localStorage.getItem('token');
 if (token) {
@@ -25,6 +26,7 @@ ReactDOM.render(
               <Route path="/" component={ SignInRoute } exact />
               <Route path="/Home" component={ HomeRoute } exact />
               <Route path="/SignUp" component={ SignUpRoute } exact />
+              <Route path="/Congrats" component={ CongratsRoute} exact />
             </Switch>
           </BrowserRouter>
         <GlobalStyle />

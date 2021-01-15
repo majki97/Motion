@@ -1,0 +1,81 @@
+html {
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid green; */
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.main-right-congrats {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+}
+
+.congrats-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: green solid; */
+    width: 60%;
+    height: 100%;
+}
+
+.section-right-congrats {
+    width: 100%;
+    height: 55%;
+    /* border: black solid; */
+}
+
+.congrats-container {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px red solid; */
+}
+
+.title {
+    display: flex;
+    font-size: 40px;
+    padding-bottom: 20px;
+    font-weight: lighter;
+    }
+
+.purple_tick-img{
+    width: 100px;
+}
+
+.confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px green solid; */
+    color: #6D6D6D;
+}
+
+.footer-btn {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    justify-content: center;
+    /* border: 1px solid yellow; */
+}
+
+.continue-btn {
+    height: 60px;
+    width: 260px;
+    font-size: 15px;
+    border-radius: 30px;
+    border-style: none;
+    background-image: linear-gradient(115deg, #922ecf 0%, #426be7);
+    color: white;
+}
+
+
+
+

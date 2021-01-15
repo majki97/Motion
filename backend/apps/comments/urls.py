@@ -1,5 +1,4 @@
 from django.urls import path
-
 from apps.comments.views import CreateGetCommentView
 
 urlpatterns = [
