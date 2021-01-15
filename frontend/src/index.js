@@ -8,6 +8,7 @@ import { HomeRoute } from './routes/HomeRoute';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from './styles';
 import { authAction } from './store/actions/auth';
+import { SignUpRoute } from './routes/SignUpRoute';
 import { CongratsRoute } from './routes/CongratsRoute';
 
 const token = localStorage.getItem('token');
@@ -24,6 +25,7 @@ ReactDOM.render(
             <Switch>
               <Route path="/" component={ SignInRoute } exact />
               <Route path="/Home" component={ HomeRoute } exact />
+              <Route path="/SignUp" component={ SignUpRoute } exact />
               <Route path="/Congrats" component={ CongratsRoute} exact />
             </Switch>
           </BrowserRouter>
