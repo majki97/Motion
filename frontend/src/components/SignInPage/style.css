@@ -1,0 +1,38 @@
+html {
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid green; */
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.main-right {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+}
+          
+
+.right {
+    /* border: green solid; */
+    width: 60%;
+    height: 100%;
+}
+    
+.section-right {
+    width: 100%;
+    height: 60%;
+    /* border: black solid; */
+}
+
+.form-container {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px green; */
+}
+
+
+
